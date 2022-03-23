@@ -73,12 +73,12 @@ function booksByColor(books) {
  ****************************************************************/
 function titlesByAuthorName(authorName, authors, books) {
   // Your code goes here
-  //const result = words.filter(word => word.length > 6);
+  let listOfBooks = books.filter(book => book.authors[0]["name"].toLowerCase() === authorName.toLowerCase());
+  return listOfBooks.map(book => book.title);
   
   
-  //return books.filter(authors => authors["name"] === authorName);
 }
-console.log(titlesByAuthorName("George R.R. Martin", authors, books));
+//console.log(titlesByAuthorName("George R.R. Martin", authors, books));
 
 /**************************************************************
  * mostProlificAuthor(authors):
@@ -89,8 +89,16 @@ console.log(titlesByAuthorName("George R.R. Martin", authors, books));
  ****************************************************************/
 function mostProlificAuthor(authors) {
   // Your code goes here
+  let numberOfBooks = 0;
+  let mostProfilic = "Nobody";
+
+  authors.forEach(author=> {
+    if(author.books.length>numberOfBooks){
+      numberOfBooks = author.books.length;
+      mostProfilic = author.name;}});
+  return mostProfilic;
 }
-// console.log(mostProlificAuthor(authors));
+//console.log(mostProlificAuthor(authors));
 
 /**************************************************************
  * relatedBooks(bookId, authors, books):
@@ -117,10 +125,39 @@ function mostProlificAuthor(authors) {
  ****************************************************************/
 function relatedBooks(bookId, authors, books) {
   // Your code goes here
+
+  // books.filter(book => book.authors[0]["name"].toLowerCase() === authorName.toLowerCase())
+  let reqTitles = []
+  let reqAuthors = authors.filter(author => author["books"].includes(bookId));
+
+  let reqNames = reqAuthors.map(reqAuthor => reqAuthor.name);
+  
+  reqNames.forEach(reqName=>{
+
+    books.forEach(book=>{
+      let i =0;
+      while (i<book.authors.length){
+      if(book.authors[i]["name"]===reqName){
+        reqTitles.push(book.title)
+      }
+      i++;
+    }
+    })
+
+  })
+  
+  return reqTitles;
+  // return [...new Set(reqTitles)] # doesnt work on NPM test for some reason
 }
-// console.log(relatedBooks(50, authors, books));
+ console.log(relatedBooks(46, authors, books));
 
 /**************************************************************
+ 
+  //
+reqNames.forEach(authorName=>{
+    reqTitles.push(titlesByAuthorName(authorName, authors, books))
+    
+  });
  * friendliestAuthor(authors):
  * - receives a list of authors
  * - returns the name of the author that has
