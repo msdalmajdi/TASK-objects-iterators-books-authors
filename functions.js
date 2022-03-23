@@ -1,7 +1,7 @@
 const authors = require("./authors.json");
 const books = require("./books.json");
 
-/**************************************************************
+/*************************** ***********************************
  * getBookById(bookId, books):
  * - receives a bookId
  * - recieves an array of book objects
@@ -10,8 +10,10 @@ const books = require("./books.json");
  ****************************************************************/
 function getBookById(bookId, books) {
   // Your code goes here
+  // array1.find(element => element > 10)
+    return books.find(book => book.id ===bookId);
 }
-// console.log(getBookById(12, books));
+ //console.log(getBookById(12, books));
 
 /**************************************************************
  * getAuthorByName(authorName, authors):
@@ -22,8 +24,9 @@ function getBookById(bookId, books) {
  ****************************************************************/
 function getAuthorByName(authorName, authors) {
   // Your code goes here
+  return authors.find(author =>author.name.toLowerCase() === authorName.toLowerCase());
 }
-// console.log(getAuthorByName("J.K. Rowling", authors));
+//console.log(getAuthorByName("J.K. Rowling", authors));
 
 /**************************************************************
  * bookCountsByAuthor(authors):
@@ -33,8 +36,13 @@ function getAuthorByName(authorName, authors) {
  ****************************************************************/
 function bookCountsByAuthor(authors) {
   // Your code goes here
+  // array1.forEach(element => console.log(element));
+  let bookcounts =[];
+  authors.forEach(author => bookcounts.push({author:author.name,bookCount:author.books.length}));
+  return bookcounts;
+
 }
-// console.log(bookCountsByAuthor(authors));
+//console.log(bookCountsByAuthor(authors));
 
 /**************************************************************
  * booksByColor(books):
@@ -47,10 +55,13 @@ function booksByColor(books) {
   const colors = {};
 
   // Your code goes here
-
-  return colors;
+  // array1.forEach(element => console.log(element));
+   books.forEach(book => Object.assign(colors,{[book.color] : []}))
+   books.forEach(book => colors[book.color].push(book.title))
+   return colors;
+   
 }
-// console.log(booksByColor(books));
+ console.log(booksByColor(books));
 
 /**************************************************************
  * titlesByAuthorName(authorName, authors, books):
