@@ -149,15 +149,11 @@ function relatedBooks(bookId, authors, books) {
   return reqTitles;
   // return [...new Set(reqTitles)] # doesnt work on NPM test for some reason
 }
- console.log(relatedBooks(46, authors, books));
+ //console.log(relatedBooks(46, authors, books));
 
 /**************************************************************
  
-  //
-reqNames.forEach(authorName=>{
-    reqTitles.push(titlesByAuthorName(authorName, authors, books))
-    
-  });
+ 
  * friendliestAuthor(authors):
  * - receives a list of authors
  * - returns the name of the author that has
@@ -165,9 +161,30 @@ reqNames.forEach(authorName=>{
  ****************************************************************/
 function friendliestAuthor(authors) {
   // Your code goes here
-}
-// console.log(friendliestAuthor(authors));
+  let bookIds =[];
 
+   authors.forEach(author=>{
+    let i =0;
+    while(i<author["books"].length){
+      bookIds.push(author["books"][i]);
+      i++;
+    }
+   });
+   
+    var map = new Map();
+    bookIds.forEach(a => map.set(a, (map.get(a) || 0) + 1));
+    let repeatedBooks = [...new Set(bookIds.filter(a => map.get(a) > 1))];
+    // words.filter(word => word.length > 6)
+    let found = [];
+    repeatedBooks.forEach(bookId =>{
+      
+    })
+    
+
+    
+}
+ console.log(friendliestAuthor(authors));
+// author["books"][i]
 module.exports = {
   getBookById,
   getAuthorByName,
