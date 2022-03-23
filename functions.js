@@ -56,12 +56,12 @@ function booksByColor(books) {
 
   // Your code goes here
   // array1.forEach(element => console.log(element));
-   books.forEach(book => Object.assign(colors,{[book.color] : []}))
-   books.forEach(book => colors[book.color].push(book.title))
+   books.forEach(book => Object.assign(colors,{[book.color] : []}));
+   books.forEach(book => colors[book.color].push(book.title));
    return colors;
    
 }
- console.log(booksByColor(books));
+ //console.log(booksByColor(books));
 
 /**************************************************************
  * titlesByAuthorName(authorName, authors, books):
@@ -73,8 +73,12 @@ function booksByColor(books) {
  ****************************************************************/
 function titlesByAuthorName(authorName, authors, books) {
   // Your code goes here
+  //const result = words.filter(word => word.length > 6);
+  
+  
+  //return books.filter(authors => authors["name"] === authorName);
 }
-// console.log(titlesByAuthorName("George R.R. Martin", authors, books));
+console.log(titlesByAuthorName("George R.R. Martin", authors, books));
 
 /**************************************************************
  * mostProlificAuthor(authors):
