@@ -182,24 +182,24 @@ function friendliestAuthor(authors) {
       found.push(authors.find(author => author.books.includes(bookId))["name"])
     });
 
-    var mf = 1;
-    var m = 0;
-    var item;
+    var mostFrequent = 1;
+    var most = 0;
+    var mostCoAuthor;
     for (var i=0; i<found.length; i++)
     {
             for (var j=i; j<found.length; j++)
             {
                     if (found[i] == found[j])
-                    m++;
-                    if (mf<m)
+                    most++;
+                    if (mostFrequent<most)
                     {
-                      mf=m; 
-                      item = found[i];
+                      mostFrequent=most; 
+                      mostCoAuthor = found[i];
                     }
             }
-            m=0;
+            most=0;
     }
-    return item;
+    return mostCoAuthor;
     
 }
  console.log(friendliestAuthor(authors));
