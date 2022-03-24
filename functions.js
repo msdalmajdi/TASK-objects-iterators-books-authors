@@ -176,15 +176,34 @@ function friendliestAuthor(authors) {
     let repeatedBooks = [...new Set(bookIds.filter(a => map.get(a) > 1))];
     // words.filter(word => word.length > 6)
     let found = [];
-    repeatedBooks.forEach(bookId =>{
-      
-    })
+    // authors.find(author =>author.name.toLowerCase() === authorName.toLowerCase());
     
+    bookIds.forEach(bookId =>{
+      found.push(authors.find(author => author.books.includes(bookId))["name"])
+    });
 
+    var mf = 1;
+    var m = 0;
+    var item;
+    for (var i=0; i<found.length; i++)
+    {
+            for (var j=i; j<found.length; j++)
+            {
+                    if (found[i] == found[j])
+                    m++;
+                    if (mf<m)
+                    {
+                      mf=m; 
+                      item = found[i];
+                    }
+            }
+            m=0;
+    }
+    return item;
     
 }
  console.log(friendliestAuthor(authors));
-// author["books"][i]
+
 module.exports = {
   getBookById,
   getAuthorByName,
